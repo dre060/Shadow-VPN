@@ -11,11 +11,11 @@ function FeatureCard({ title, desc, icon: Icon, delay = 0 }) {
 
   return (
     <div className={`group text-center p-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg">
-        {Icon && <Icon className="w-6 h-6 text-white" />}
+      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg">
+        {Icon ? <Icon className="w-8 h-8 text-white" /> : <div className="w-8 h-8 bg-white/20 rounded"></div>}
       </div>
-      <h3 className="text-lg font-bold mb-2 text-white tracking-tight">{title}</h3>
-      <p className="text-gray-400 leading-relaxed text-base">{desc}</p>
+      <h3 className="text-xl font-bold mb-3 text-white tracking-tight">{title}</h3>
+      <p className="text-gray-400 leading-relaxed">{desc}</p>
     </div>
   );
 }
@@ -86,10 +86,10 @@ function FeatureDropdowns() {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto">
+    <div className="w-full max-w-4xl mx-auto px-4">
       <div className="text-center mb-12">
-        <h3 className="text-2xl font-bold mb-3 tracking-tight">Complete Feature Overview</h3>
-        <p className="text-gray-400 text-base max-w-3xl mx-auto">Explore all the powerful features that make ShadowVPN your ultimate privacy solution.</p>
+        <h3 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tight text-white">Complete Feature Overview</h3>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">Explore all the powerful features that make ShadowVPN your ultimate privacy solution.</p>
       </div>
 
       <div className="space-y-4">
@@ -104,16 +104,19 @@ function FeatureDropdowns() {
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-800/30 transition-colors"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <IconComponent className="w-5 h-5 text-white" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    {IconComponent ? <IconComponent className="w-6 h-6 text-white" /> : <div className="w-6 h-6 bg-white/20 rounded"></div>}
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-white tracking-tight">{category.title}</h4>
                     <p className="text-gray-400 text-sm">{category.features.length} features</p>
                   </div>
                 </div>
-                <div className="text-gray-400">
-                  {isOpen ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+                <div className="text-gray-400 flex-shrink-0">
+                  {isOpen ? 
+                    <ChevronDown className="w-5 h-5" /> : 
+                    <ChevronRight className="w-5 h-5" />
+                  }
                 </div>
               </button>
 
@@ -153,21 +156,21 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
     <div className={`relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-500 ${isPopular ? 'ring-2 ring-blue-500 scale-105' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       {isPopular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold flex items-center gap-2">
-            <Star className="w-4 h-4" />
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
+            {Star ? <Star className="w-4 h-4" /> : <span>★</span>}
             Most Popular
           </div>
         </div>
       )}
       
       <div className="text-center">
-        <h3 className="text-xl font-bold mb-2 text-white tracking-tight">{plan}</h3>
+        <h3 className="text-xl font-bold mb-4 text-white tracking-tight">{plan}</h3>
         <div className="mb-6">
           {originalPrice && (
-            <div className="text-gray-400 line-through text-base mb-1">${originalPrice}/{period}</div>
+            <div className="text-gray-400 line-through text-lg mb-2">${originalPrice}/{period}</div>
           )}
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-3xl font-bold text-white">${price}</span>
+            <span className="text-4xl font-bold text-white">${price}</span>
             <span className="text-gray-400">/{period}</span>
           </div>
         </div>
@@ -175,13 +178,13 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
         <div className="space-y-3 mb-8 text-left">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center gap-3">
-              <Check className="w-4 h-4 text-green-400 flex-shrink-0" />
-              <span className="text-gray-300 text-base">{feature}</span>
+              {Check ? <Check className="w-5 h-5 text-green-400 flex-shrink-0" /> : <span className="text-green-400 flex-shrink-0">✓</span>}
+              <span className="text-gray-300">{feature}</span>
             </div>
           ))}
         </div>
         
-        <button className={`w-full min-w-[140px] py-3 rounded-xl font-semibold transition-all duration-300 ${
+        <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
           isPopular 
             ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl' 
             : 'bg-white text-gray-900 hover:bg-gray-100'
@@ -202,27 +205,30 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden scroll-smooth">
+    <div className="min-h-screen bg-black text-white">
       {/* Subtle background gradient */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
       {/* Header */}
-      <header className="relative z-50 border-b border-gray-800/50 backdrop-blur-xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between h-16">
+      <header className="relative z-50 border-b border-gray-800/50 backdrop-blur-xl">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <img 
                 src="/logo.png" 
                 alt="ShadowVPN" 
-                className="w-8 h-8 object-contain rounded"
+                className="w-10 h-10 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
               />
-              <span className="text-xl font-bold tracking-tight">ShadowVPN</span>
+              <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-12">
               <a href="#features" className="text-gray-300 hover:text-white transition-colors font-medium">Features</a>
               <a href="#pricing" className="text-gray-300 hover:text-white transition-colors font-medium">Pricing</a>
               <a href="#apps" className="text-gray-300 hover:text-white transition-colors font-medium">Apps</a>
@@ -230,25 +236,28 @@ export default function App() {
             </nav>
 
             {/* CTA Button */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-4">
               <button className="text-gray-300 hover:text-white transition-colors font-medium">Sign In</button>
-              <button className="min-w-[140px] bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6 py-2 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+              <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
                 Get ShadowVPN
               </button>
             </div>
 
             {/* Mobile menu button */}
             <button 
-              className="md:hidden text-gray-300 hover:text-white p-2"
+              className="lg:hidden text-gray-300 hover:text-white p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? 
+                (X ? <X className="w-6 h-6" /> : <span className="text-2xl">✕</span>) : 
+                (Menu ? <Menu className="w-6 h-6" /> : <span className="text-2xl">☰</span>)
+              }
             </button>
           </div>
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-800">
+            <div className="lg:hidden py-6 border-t border-gray-800">
               <div className="space-y-4">
                 <a href="#features" className="block text-gray-300 hover:text-white transition-colors py-2">Features</a>
                 <a href="#pricing" className="block text-gray-300 hover:text-white transition-colors py-2">Pricing</a>
@@ -267,44 +276,44 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 py-20 lg:py-32 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="relative z-10 py-20 lg:py-32">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8">
                 Browse. Vanish.
                 <br />
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Repeat.
                 </span>
               </h1>
-              <p className="text-xl text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl lg:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
                 Military-grade privacy meets lightning-fast speed. Your digital freedom starts here.
               </p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                <button className="group min-w-[180px] bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center justify-center gap-3">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
+                <button className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3">
                   Get ShadowVPN Free
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  {ArrowRight ? <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> : <span>→</span>}
                 </button>
                 <button className="group flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-                  <PlayCircle className="w-6 h-6" />
+                  {PlayCircle ? <PlayCircle className="w-6 h-6" /> : <span>▶</span>}
                   <span className="font-medium">Watch Demo</span>
                 </button>
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center gap-8 text-gray-500 text-xs mt-6">
-                <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4" />
+              <div className="flex flex-wrap justify-center items-center gap-12 text-gray-500">
+                <div className="flex items-center gap-3">
+                  {Shield ? <Shield className="w-5 h-5" /> : <span>🛡</span>}
                   <span className="font-medium">Military-grade encryption</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
+                <div className="flex items-center gap-3">
+                  {Globe ? <Globe className="w-5 h-5" /> : <span>🌐</span>}
                   <span className="font-medium">60+ countries</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Eye className="w-4 h-4" />
+                <div className="flex items-center gap-3">
+                  {Eye ? <Eye className="w-5 h-5" /> : <span>👁</span>}
                   <span className="font-medium">Zero logs</span>
                 </div>
               </div>
@@ -314,10 +323,10 @@ export default function App() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-10 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-3 tracking-tight">
+      <section id="features" className="relative z-10 py-20">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
               Why choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ShadowVPN</span>?
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -325,7 +334,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4 lg:gap-10 mb-20">
+          <div className="grid md:grid-cols-3 gap-12 lg:gap-16 mb-20">
             <FeatureCard 
               title="Unbreakable Security" 
               desc="AES-256 military-grade encryption ensures your data stays protected from any threat, anywhere in the world."
@@ -352,19 +361,19 @@ export default function App() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="relative z-10 py-16 px-4 sm:px-6 lg:px-8 bg-gray-900/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-3 tracking-tight">
+      <section id="pricing" className="relative z-10 py-20 bg-gray-900/20">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
               Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span>
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-400">
               All plans include our premium features with a 30-day money-back guarantee.
             </p>
           </div>
 
-          <div className="max-w-screen-lg mx-auto">
-            <div className="grid md:grid-cols-3 gap-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8">
               <PricingCard
                 plan="1 Month"
                 price="12.99"
@@ -417,11 +426,11 @@ export default function App() {
       </section>
 
       {/* Blockchain Section */}
-      <section className="relative z-10 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-screen-lg mx-auto text-center">
+      <section className="relative z-10 py-20">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto text-center">
             <div className="bg-gradient-to-r from-blue-950/30 to-purple-950/30 rounded-3xl p-12 lg:p-16 border border-gray-800">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-3 tracking-tight">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">
                 Powered by <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Blockchain</span>
               </h2>
               <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -437,64 +446,68 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-800 bg-gray-950/50 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-screen-lg mx-auto">
-            <div className="grid md:grid-cols-4 gap-8 mb-12">
-              <div>
-                <div className="flex items-center space-x-3 mb-6">
-                  <img 
-                    src="/logo.png" 
-                    alt="ShadowVPN" 
-                    className="w-8 h-8 object-contain rounded"
-                  />
-                  <span className="text-xl font-bold tracking-tight">ShadowVPN</span>
-                </div>
-                <p className="text-gray-400 leading-relaxed">
-                  Your privacy, our mission. Browse the web without leaving a trace.
-                </p>
+      <footer className="relative z-10 border-t border-gray-800 bg-gray-950/50 py-16">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-12 mb-12">
+            <div>
+              <div className="flex items-center space-x-3 mb-6">
+                <img 
+                  src="/logo.png" 
+                  alt="ShadowVPN" 
+                  className="w-8 h-8 object-contain"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+                <span className="text-xl font-bold tracking-tight">ShadowVPN</span>
               </div>
-              
-              <div>
-                <h4 className="font-semibold mb-4">Product</h4>
-                <div className="space-y-3 text-gray-400">
-                  <a href="#" className="block hover:text-white transition-colors">Features</a>
-                  <a href="#" className="block hover:text-white transition-colors">Pricing</a>
-                  <a href="#" className="block hover:text-white transition-colors">Apps</a>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold mb-4">Support</h4>
-                <div className="space-y-3 text-gray-400">
-                  <a href="#" className="block hover:text-white transition-colors">Help Center</a>
-                  <a href="#" className="block hover:text-white transition-colors">Contact Us</a>
-                  <a href="#" className="block hover:text-white transition-colors">Status</a>
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold mb-4">Company</h4>
-                <div className="space-y-3 text-gray-400">
-                  <a href="#" className="block hover:text-white transition-colors">About</a>
-                  <a href="#" className="block hover:text-white transition-colors">Privacy Policy</a>
-                  <a href="#" className="block hover:text-white transition-colors">Terms of Service</a>
-                </div>
+              <p className="text-gray-400 leading-relaxed">
+                Your privacy, our mission. Browse the web without leaving a trace.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <div className="space-y-3 text-gray-400">
+                <a href="#" className="block hover:text-white transition-colors">Features</a>
+                <a href="#" className="block hover:text-white transition-colors">Pricing</a>
+                <a href="#" className="block hover:text-white transition-colors">Apps</a>
               </div>
             </div>
             
-            <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
-              <p className="text-gray-400 mb-4 md:mb-0">
-                &copy; 2025 ShadowVPN. All rights reserved.
-              </p>
-              <div className="flex items-center gap-3">
-                <img 
-                  src="/all-coin.png" 
-                  alt="ALL Coin" 
-                  className="w-6 h-6 object-contain rounded"
-                />
-                <span className="text-cyan-400 font-semibold">Powered by ALL</span>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <div className="space-y-3 text-gray-400">
+                <a href="#" className="block hover:text-white transition-colors">Help Center</a>
+                <a href="#" className="block hover:text-white transition-colors">Contact Us</a>
+                <a href="#" className="block hover:text-white transition-colors">Status</a>
               </div>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <div className="space-y-3 text-gray-400">
+                <a href="#" className="block hover:text-white transition-colors">About</a>
+                <a href="#" className="block hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" className="block hover:text-white transition-colors">Terms of Service</a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
+            <p className="text-gray-400 mb-4 md:mb-0">
+              &copy; 2025 ShadowVPN. All rights reserved.
+            </p>
+            <div className="flex items-center gap-3">
+              <img 
+                src="/all-coin.png" 
+                alt="ALL Coin" 
+                className="w-6 h-6 object-contain"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                }}
+              />
+              <span className="text-cyan-400 font-semibold">Powered by ALL</span>
             </div>
           </div>
         </div>
