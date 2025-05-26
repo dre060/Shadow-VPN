@@ -226,13 +226,35 @@ export default function App() {
     setIsVisible(true);
   }, []);
 
+  // Inline styles to force proper navigation layout
+  const navStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
+  };
+
+  const navItemStyles = {
+    color: '#d1d5db',
+    textDecoration: 'none',
+    fontWeight: '500',
+    padding: '12px 24px',
+    borderRadius: '8px',
+    transition: 'all 0.2s',
+    display: 'block'
+  };
+
+  const navItemHoverStyles = {
+    color: '#ffffff',
+    backgroundColor: 'rgba(31, 41, 55, 0.3)'
+  };
+
   return (
     <div className="min-h-screen w-full bg-black text-white">
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
-      {/* Header - COMPLETELY REBUILT */}
+      {/* Header - FORCE FIXED WITH INLINE STYLES */}
       <header className="relative z-50 w-full border-b border-gray-800/50 backdrop-blur-xl">
         <div className="w-full max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-24">
@@ -243,42 +265,58 @@ export default function App() {
               <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
             </div>
 
-            {/* Desktop Navigation - FIXED STRUCTURE */}
+            {/* Desktop Navigation - FORCED WITH INLINE STYLES */}
             <nav className="hidden lg:block">
-              <ul className="flex items-center space-x-2">
-                <li>
-                  <a 
-                    href="#features" 
-                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
-                  >
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#pricing" 
-                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
-                  >
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#apps" 
-                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
-                  >
-                    Apps
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#support" 
-                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
-                  >
-                    Support
-                  </a>
-                </li>
-              </ul>
+              <div style={navStyles}>
+                <a 
+                  href="#features" 
+                  style={navItemStyles}
+                  onMouseEnter={(e) => {
+                    Object.assign(e.target.style, navItemHoverStyles);
+                  }}
+                  onMouseLeave={(e) => {
+                    Object.assign(e.target.style, navItemStyles);
+                  }}
+                >
+                  Features
+                </a>
+                <a 
+                  href="#pricing" 
+                  style={navItemStyles}
+                  onMouseEnter={(e) => {
+                    Object.assign(e.target.style, navItemHoverStyles);
+                  }}
+                  onMouseLeave={(e) => {
+                    Object.assign(e.target.style, navItemStyles);
+                  }}
+                >
+                  Pricing
+                </a>
+                <a 
+                  href="#apps" 
+                  style={navItemStyles}
+                  onMouseEnter={(e) => {
+                    Object.assign(e.target.style, navItemHoverStyles);
+                  }}
+                  onMouseLeave={(e) => {
+                    Object.assign(e.target.style, navItemStyles);
+                  }}
+                >
+                  Apps
+                </a>
+                <a 
+                  href="#support" 
+                  style={navItemStyles}
+                  onMouseEnter={(e) => {
+                    Object.assign(e.target.style, navItemHoverStyles);
+                  }}
+                  onMouseLeave={(e) => {
+                    Object.assign(e.target.style, navItemStyles);
+                  }}
+                >
+                  Support
+                </a>
+              </div>
             </nav>
 
             {/* CTA Buttons */}
@@ -304,28 +342,20 @@ export default function App() {
           {isMenuOpen && (
             <div className="lg:hidden py-6 border-t border-gray-800 bg-gray-900/95 backdrop-blur-xl rounded-b-2xl">
               <nav>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="#features" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
-                      Features
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#pricing" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
-                      Pricing
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#apps" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
-                      Apps
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#support" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
-                      Support
-                    </a>
-                  </li>
-                </ul>
+                <div className="space-y-2">
+                  <a href="#features" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                    Features
+                  </a>
+                  <a href="#pricing" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                    Pricing
+                  </a>
+                  <a href="#apps" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                    Apps
+                  </a>
+                  <a href="#support" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                    Support
+                  </a>
+                </div>
                 <div className="pt-4 space-y-3 border-t border-gray-800 mt-4">
                   <button className="block w-full text-left text-gray-300 hover:text-white hover:bg-gray-800/50 py-3 px-4 rounded-lg transition-colors">
                     Sign In
@@ -525,29 +555,29 @@ export default function App() {
             
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Apps</a></li>
-              </ul>
+              <div className="space-y-3 text-gray-400">
+                <div><a href="#" className="hover:text-white transition-colors">Features</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Pricing</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Apps</a></div>
+              </div>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
-              </ul>
+              <div className="space-y-3 text-gray-400">
+                <div><a href="#" className="hover:text-white transition-colors">Help Center</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Contact Us</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Status</a></div>
+              </div>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-              </ul>
+              <div className="space-y-3 text-gray-400">
+                <div><a href="#" className="hover:text-white transition-colors">About</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></div>
+                <div><a href="#" className="hover:text-white transition-colors">Terms of Service</a></div>
+              </div>
             </div>
           </div>
           
