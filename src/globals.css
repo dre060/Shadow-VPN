@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
-/* Reset and base styles */
+/* Base styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -22,9 +27,9 @@ body {
   background: #000;
   color: #fff;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-/* ... rest of your styles remain unchanged ... */
 
 #root {
   min-height: 100vh;
@@ -32,22 +37,54 @@ body {
   margin: 0;
   padding: 0;
   position: relative;
+  display: block;
+}
+
+/* Ensure images load properly */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix any potential layout issues */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* Custom animations */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
 }
 
 .animate-fade-in {
@@ -62,16 +99,43 @@ body {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Remove any default styling that might interfere */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Ensure proper text rendering */
+/* Ensure gradients work properly */
 .text-gradient {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(to right, #60a5fa, #a855f7);
+}
+
+/* Fix any potential flexbox issues */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* Navigation fix */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul li a {
+  display: block;
+  text-decoration: none;
 }

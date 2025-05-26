@@ -25,20 +25,6 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
       },
-      backdropBlur: {
-        xs: '2px',
-      },
-      colors: {
-        'shadow-blue': {
-          500: '#3B82F6',
-          600: '#2563EB',
-        },
-        'shadow-purple': {
-          500: '#8B5CF6',
-          600: '#7C3AED',
-        },
-      },
     },
   },
-  plugins: [],
 }
