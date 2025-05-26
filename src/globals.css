@@ -1,4 +1,9 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* ... your custom styles ... */
+
 
 /* Reset and base styles */
 * {
