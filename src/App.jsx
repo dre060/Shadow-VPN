@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, Zap, Globe, Eye, Lock, Power, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
+import { Shield, Zap, Globe, Eye, Lock, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
 
-// ShadowVPN Logo Component - uses actual logo.png from public folder
+// Logo Components
 function ShadowLogo({ size = "w-8 h-8" }) {
   return (
     <div className={`${size} flex items-center justify-center flex-shrink-0`}>
@@ -14,7 +14,6 @@ function ShadowLogo({ size = "w-8 h-8" }) {
   );
 }
 
-// ALL Coin Logo Component - uses actual all-coin.png from public folder
 function ALLLogo({ size = "w-4 h-4" }) {
   return (
     <div className={`${size} flex items-center justify-center flex-shrink-0`}>
@@ -233,33 +232,66 @@ export default function App() {
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
-      {/* Header */}
+      {/* Header - COMPLETELY REBUILT */}
       <header className="relative z-50 w-full border-b border-gray-800/50 backdrop-blur-xl">
         <div className="w-full max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-24">
-            {/* Logo */}
+            
+            {/* Logo Section */}
             <div className="flex items-center space-x-4">
               <ShadowLogo size="w-12 h-12" />
               <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center">
-              <a href="#features" className="text-gray-300 hover:text-white transition-colors font-medium px-6 py-2 hover:bg-gray-800/30 rounded-lg">Features</a>
-              <a href="#pricing" className="text-gray-300 hover:text-white transition-colors font-medium px-6 py-2 hover:bg-gray-800/30 rounded-lg">Pricing</a>
-              <a href="#apps" className="text-gray-300 hover:text-white transition-colors font-medium px-6 py-2 hover:bg-gray-800/30 rounded-lg">Apps</a>
-              <a href="#support" className="text-gray-300 hover:text-white transition-colors font-medium px-6 py-2 hover:bg-gray-800/30 rounded-lg">Support</a>
+            {/* Desktop Navigation - FIXED STRUCTURE */}
+            <nav className="hidden lg:block">
+              <ul className="flex items-center space-x-2">
+                <li>
+                  <a 
+                    href="#features" 
+                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
+                  >
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#pricing" 
+                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
+                  >
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#apps" 
+                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
+                  >
+                    Apps
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#support" 
+                    className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg block"
+                  >
+                    Support
+                  </a>
+                </li>
+              </ul>
             </nav>
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <div className="hidden lg:flex items-center space-x-6">
-              <button className="text-gray-300 hover:text-white transition-colors font-medium px-4 py-2">Sign In</button>
+              <button className="text-gray-300 hover:text-white transition-colors font-medium px-4 py-2">
+                Sign In
+              </button>
               <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                 Get ShadowVPN
               </button>
             </div>
 
-            {/* Mobile menu button */}
+            {/* Mobile Menu Button */}
             <button 
               className="lg:hidden text-gray-300 hover:text-white p-3 hover:bg-gray-800/30 rounded-lg transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -271,18 +303,38 @@ export default function App() {
           {/* Mobile Navigation */}
           {isMenuOpen && (
             <div className="lg:hidden py-6 border-t border-gray-800 bg-gray-900/95 backdrop-blur-xl rounded-b-2xl">
-              <div className="space-y-2">
-                <a href="#features" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">Features</a>
-                <a href="#pricing" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">Pricing</a>
-                <a href="#apps" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">Apps</a>
-                <a href="#support" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">Support</a>
+              <nav>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#features" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                      Features
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#pricing" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#apps" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                      Apps
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#support" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                      Support
+                    </a>
+                  </li>
+                </ul>
                 <div className="pt-4 space-y-3 border-t border-gray-800 mt-4">
-                  <button className="block w-full text-left text-gray-300 hover:text-white hover:bg-gray-800/50 py-3 px-4 rounded-lg transition-colors">Sign In</button>
+                  <button className="block w-full text-left text-gray-300 hover:text-white hover:bg-gray-800/50 py-3 px-4 rounded-lg transition-colors">
+                    Sign In
+                  </button>
                   <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 py-3 px-4 rounded-xl font-semibold transition-all duration-300">
                     Get ShadowVPN
                   </button>
                 </div>
-              </div>
+              </nav>
             </div>
           )}
         </div>
@@ -473,29 +525,29 @@ export default function App() {
             
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
-              <div className="space-y-3 text-gray-400">
-                <a href="#" className="block hover:text-white transition-colors">Features</a>
-                <a href="#" className="block hover:text-white transition-colors">Pricing</a>
-                <a href="#" className="block hover:text-white transition-colors">Apps</a>
-              </div>
+              <ul className="space-y-3 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Apps</a></li>
+              </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Support</h4>
-              <div className="space-y-3 text-gray-400">
-                <a href="#" className="block hover:text-white transition-colors">Help Center</a>
-                <a href="#" className="block hover:text-white transition-colors">Contact Us</a>
-                <a href="#" className="block hover:text-white transition-colors">Status</a>
-              </div>
+              <ul className="space-y-3 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Status</a></li>
+              </ul>
             </div>
             
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
-              <div className="space-y-3 text-gray-400">
-                <a href="#" className="block hover:text-white transition-colors">About</a>
-                <a href="#" className="block hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="block hover:text-white transition-colors">Terms of Service</a>
-              </div>
+              <ul className="space-y-3 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              </ul>
             </div>
           </div>
           
