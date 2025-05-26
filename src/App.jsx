@@ -1,20 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Zap, Globe, Eye, Lock, Power, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
 
-// Logo Component
-function ShadowLogo({ size = "w-8 h-8", textSize = "text-sm" }) {
+// ShadowVPN Logo Component - uses actual logo.png from public folder
+function ShadowLogo({ size = "w-8 h-8" }) {
   return (
-    <div className={`${size} bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0`}>
-      <Shield className={`${textSize === "text-sm" ? "w-4 h-4" : textSize === "text-xs" ? "w-3 h-3" : "w-5 h-5"} text-white`} />
+    <div className={`${size} flex items-center justify-center flex-shrink-0`}>
+      <img 
+        src="/logo.png" 
+        alt="ShadowVPN Logo" 
+        className={`${size} object-contain drop-shadow-lg`}
+      />
     </div>
   );
 }
 
-// ALL Logo Component
+// ALL Coin Logo Component - uses actual all-coin.png from public folder
 function ALLLogo({ size = "w-4 h-4" }) {
   return (
-    <div className={`${size} bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0`}>
-      <span className="text-white font-bold text-xs">A</span>
+    <div className={`${size} flex items-center justify-center flex-shrink-0`}>
+      <img 
+        src="/all-coin.png" 
+        alt="ALL Coin Logo" 
+        className={`${size} object-contain drop-shadow-lg`}
+      />
     </div>
   );
 }
@@ -220,18 +228,18 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white" style={{ margin: 0, padding: 0 }}>
+    <div className="min-h-screen w-full bg-black text-white">
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
       {/* Header */}
-      <header className="relative z-50 border-b border-gray-800/50 backdrop-blur-xl">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <header className="relative z-50 w-full border-b border-gray-800/50 backdrop-blur-xl">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <ShadowLogo />
+              <ShadowLogo size="w-10 h-10" />
               <span className="text-2xl font-bold">ShadowVPN</span>
             </div>
 
@@ -281,8 +289,8 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 py-32">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="relative z-10 w-full py-32">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="text-center max-w-5xl mx-auto">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
               <h1 className="text-6xl lg:text-7xl font-bold leading-tight mb-8">
@@ -328,8 +336,8 @@ export default function App() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-10 py-32">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section id="features" className="relative z-10 w-full py-32">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Why choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ShadowVPN</span>?
@@ -365,8 +373,8 @@ export default function App() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="relative z-10 py-32 bg-gray-900/20">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section id="pricing" className="relative z-10 w-full py-32 bg-gray-900/20">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span>
@@ -430,8 +438,8 @@ export default function App() {
       </section>
 
       {/* Blockchain Section */}
-      <section className="relative z-10 py-32">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <section className="relative z-10 w-full py-32">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="bg-gradient-to-r from-blue-950/30 to-purple-950/30 rounded-3xl p-16 border border-gray-800">
               <h2 className="text-3xl lg:text-4xl font-bold mb-6">
@@ -450,12 +458,12 @@ export default function App() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-800 bg-gray-950/50 py-16">
-        <div className="container mx-auto px-6 max-w-7xl">
+      <footer className="relative z-10 w-full border-t border-gray-800 bg-gray-950/50 py-16">
+        <div className="w-full max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <ShadowLogo size="w-6 h-6" textSize="text-xs" />
+                <ShadowLogo size="w-8 h-8" />
                 <span className="text-xl font-bold">ShadowVPN</span>
               </div>
               <p className="text-gray-400 leading-relaxed">
@@ -496,7 +504,7 @@ export default function App() {
               &copy; 2025 ShadowVPN. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
-              <ALLLogo />
+              <ALLLogo size="w-6 h-6" />
               <span className="text-cyan-400 font-semibold">Powered by ALL</span>
             </div>
           </div>
