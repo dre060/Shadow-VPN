@@ -10,11 +10,11 @@ function FeatureCard({ title, desc, icon: Icon, delay = 0 }) {
   }, [delay]);
 
   return (
-    <div className={`group text-center p-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-lg">
+    <div className={`text-center p-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto hover:scale-110 transition-transform duration-300 shadow-lg">
         {Icon ? <Icon className="w-8 h-8 text-white" /> : <div className="w-8 h-8 bg-white/20 rounded"></div>}
       </div>
-      <h3 className="text-xl font-bold mb-3 text-white tracking-tight">{title}</h3>
+      <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
       <p className="text-gray-400 leading-relaxed">{desc}</p>
     </div>
   );
@@ -86,10 +86,10 @@ function FeatureDropdowns() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <div className="max-w-4xl mx-auto px-6">
       <div className="text-center mb-12">
-        <h3 className="text-2xl lg:text-3xl font-bold mb-4 tracking-tight text-white">Complete Feature Overview</h3>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">Explore all the powerful features that make ShadowVPN your ultimate privacy solution.</p>
+        <h3 className="text-3xl font-bold mb-4 text-white">Complete Feature Overview</h3>
+        <p className="text-gray-400 text-lg">Explore all the powerful features that make ShadowVPN your ultimate privacy solution.</p>
       </div>
 
       <div className="space-y-4">
@@ -108,14 +108,14 @@ function FeatureDropdowns() {
                     {IconComponent ? <IconComponent className="w-6 h-6 text-white" /> : <div className="w-6 h-6 bg-white/20 rounded"></div>}
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-white tracking-tight">{category.title}</h4>
+                    <h4 className="text-lg font-semibold text-white">{category.title}</h4>
                     <p className="text-gray-400 text-sm">{category.features.length} features</p>
                   </div>
                 </div>
                 <div className="text-gray-400 flex-shrink-0">
                   {isOpen ? 
-                    <ChevronDown className="w-5 h-5" /> : 
-                    <ChevronRight className="w-5 h-5" />
+                    (ChevronDown ? <ChevronDown className="w-5 h-5" /> : <span>▼</span>) : 
+                    (ChevronRight ? <ChevronRight className="w-5 h-5" /> : <span>▶</span>)
                   }
                 </div>
               </button>
@@ -124,8 +124,8 @@ function FeatureDropdowns() {
                 <div className="px-6 pb-6 border-t border-gray-800">
                   <div className="grid md:grid-cols-2 gap-6 pt-6">
                     {category.features.map((feature, index) => (
-                      <div key={index} className="group">
-                        <h5 className="font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                      <div key={index}>
+                        <h5 className="font-semibold text-white mb-2 hover:text-blue-400 transition-colors">
                           {feature.name}
                         </h5>
                         <p className="text-gray-400 text-sm leading-relaxed">
@@ -164,7 +164,7 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
       )}
       
       <div className="text-center">
-        <h3 className="text-xl font-bold mb-4 text-white tracking-tight">{plan}</h3>
+        <h3 className="text-2xl font-bold mb-4 text-white">{plan}</h3>
         <div className="mb-6">
           {originalPrice && (
             <div className="text-gray-400 line-through text-lg mb-2">${originalPrice}/{period}</div>
@@ -206,25 +206,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Subtle background gradient */}
+      {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
       {/* Header */}
       <header className="relative z-50 border-b border-gray-800/50 backdrop-blur-xl">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+            {/* Logo - Fixed Size */}
             <div className="flex items-center space-x-3">
-              <img 
-                src="/logo.png" 
-                alt="ShadowVPN" 
-                className="w-10 h-10 object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-              <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-sm">S</span>
+              </div>
+              <span className="text-2xl font-bold">ShadowVPN</span>
             </div>
 
             {/* Desktop Navigation */}
@@ -248,10 +243,7 @@ export default function App() {
               className="lg:hidden text-gray-300 hover:text-white p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? 
-                (X ? <X className="w-6 h-6" /> : <span className="text-2xl">✕</span>) : 
-                (Menu ? <Menu className="w-6 h-6" /> : <span className="text-2xl">☰</span>)
-              }
+              {isMenuOpen ? <span className="text-2xl">✕</span> : <span className="text-2xl">☰</span>}
             </button>
           </div>
 
@@ -276,27 +268,27 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 py-20 lg:py-32">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
+      <section className="relative z-10 py-32">
+        <div className="container mx-auto px-6 max-w-7xl">
+          <div className="text-center max-w-5xl mx-auto">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8">
+              <h1 className="text-6xl lg:text-7xl font-bold leading-tight mb-8">
                 Browse. Vanish.
                 <br />
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Repeat.
                 </span>
               </h1>
-              <p className="text-xl lg:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed">
                 Military-grade privacy meets lightning-fast speed. Your digital freedom starts here.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-                <button className="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3">
+                <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3">
                   Get ShadowVPN Free
-                  {ArrowRight ? <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" /> : <span>→</span>}
+                  {ArrowRight ? <ArrowRight className="w-5 h-5" /> : <span>→</span>}
                 </button>
-                <button className="group flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                <button className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
                   {PlayCircle ? <PlayCircle className="w-6 h-6" /> : <span>▶</span>}
                   <span className="font-medium">Watch Demo</span>
                 </button>
@@ -323,10 +315,10 @@ export default function App() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-10 py-20">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="features" className="relative z-10 py-32">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Why choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ShadowVPN</span>?
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
@@ -355,16 +347,15 @@ export default function App() {
             />
           </div>
 
-          {/* Detailed Features Dropdown */}
           <FeatureDropdowns />
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="relative z-10 py-20 bg-gray-900/20">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="pricing" className="relative z-10 py-32 bg-gray-900/20">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 tracking-tight">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
               Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span>
             </h2>
             <p className="text-xl text-gray-400">
@@ -426,14 +417,14 @@ export default function App() {
       </section>
 
       {/* Blockchain Section */}
-      <section className="relative z-10 py-20">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative z-10 py-32">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-gradient-to-r from-blue-950/30 to-purple-950/30 rounded-3xl p-12 lg:p-16 border border-gray-800">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6 tracking-tight">
+            <div className="bg-gradient-to-r from-blue-950/30 to-purple-950/30 rounded-3xl p-16 border border-gray-800">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
                 Powered by <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Blockchain</span>
               </h2>
-              <p className="text-lg text-gray-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-lg text-gray-400 mb-8 leading-relaxed">
                 ShadowVPN is integrating with the <strong className="text-cyan-400">ALL Ecosystem</strong> to bring you decentralized identity, smart contracts, and cryptocurrency payments for the ultimate privacy experience.
               </p>
               <div className="inline-flex items-center gap-3 bg-cyan-500/10 text-cyan-400 px-6 py-3 rounded-full border border-cyan-500/20">
@@ -447,19 +438,14 @@ export default function App() {
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-gray-800 bg-gray-950/50 py-16">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <img 
-                  src="/logo.png" 
-                  alt="ShadowVPN" 
-                  className="w-8 h-8 object-contain"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-                <span className="text-xl font-bold tracking-tight">ShadowVPN</span>
+                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-xs">S</span>
+                </div>
+                <span className="text-xl font-bold">ShadowVPN</span>
               </div>
               <p className="text-gray-400 leading-relaxed">
                 Your privacy, our mission. Browse the web without leaving a trace.
@@ -499,14 +485,9 @@ export default function App() {
               &copy; 2025 ShadowVPN. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
-              <img 
-                src="/all-coin.png" 
-                alt="ALL Coin" 
-                className="w-6 h-6 object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
+              <div className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-white font-bold text-xs">A</span>
+              </div>
               <span className="text-cyan-400 font-semibold">Powered by ALL</span>
             </div>
           </div>
