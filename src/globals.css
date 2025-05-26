@@ -1,9 +1,4 @@
-@import "tailwindcss/preflight";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-/* ... your custom styles ... */
-
+@import "tailwindcss";
 
 /* Reset and base styles */
 * {
@@ -28,6 +23,8 @@ body {
   color: #fff;
   overflow-x: hidden;
 }
+
+/* ... rest of your styles remain unchanged ... */
 
 #root {
   min-height: 100vh;
