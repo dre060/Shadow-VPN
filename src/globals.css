@@ -15,10 +15,12 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   line-height: 1.6;
   margin: 0;
+  padding: 0;
   min-height: 100vh;
   background: #000;
   color: #fff;
   overflow-x: hidden;
+  /* Remove flex and centering properties that conflict */
 }
 
 #root {
@@ -26,7 +28,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  text-align: left;
+  /* Remove text-align and centering */
 }
 
 /* Custom animations */

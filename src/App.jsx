@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Zap, Globe, Eye, Lock, Power, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
 
+// Logo Component
+function ShadowLogo({ size = "w-8 h-8", textSize = "text-sm" }) {
+  return (
+    <div className={`${size} bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0`}>
+      <Shield className={`${textSize === "text-sm" ? "w-4 h-4" : textSize === "text-xs" ? "w-3 h-3" : "w-5 h-5"} text-white`} />
+    </div>
+  );
+}
+
+// ALL Logo Component
+function ALLLogo({ size = "w-4 h-4" }) {
+  return (
+    <div className={`${size} bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0`}>
+      <span className="text-white font-bold text-xs">A</span>
+    </div>
+  );
+}
+
 function FeatureCard({ title, desc, icon: Icon, delay = 0 }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -12,7 +30,7 @@ function FeatureCard({ title, desc, icon: Icon, delay = 0 }) {
   return (
     <div className={`text-center p-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
       <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto hover:scale-110 transition-transform duration-300 shadow-lg">
-        {Icon ? <Icon className="w-8 h-8 text-white" /> : <div className="w-8 h-8 bg-white/20 rounded"></div>}
+        <Icon className="w-8 h-8 text-white" />
       </div>
       <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
       <p className="text-gray-400 leading-relaxed">{desc}</p>
@@ -105,7 +123,7 @@ function FeatureDropdowns() {
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    {IconComponent ? <IconComponent className="w-6 h-6 text-white" /> : <div className="w-6 h-6 bg-white/20 rounded"></div>}
+                    <IconComponent className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-white">{category.title}</h4>
@@ -113,10 +131,7 @@ function FeatureDropdowns() {
                   </div>
                 </div>
                 <div className="text-gray-400 flex-shrink-0">
-                  {isOpen ? 
-                    (ChevronDown ? <ChevronDown className="w-5 h-5" /> : <span>▼</span>) : 
-                    (ChevronRight ? <ChevronRight className="w-5 h-5" /> : <span>▶</span>)
-                  }
+                  {isOpen ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
                 </div>
               </button>
 
@@ -157,7 +172,7 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
       {isPopular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-            {Star ? <Star className="w-4 h-4" /> : <span>★</span>}
+            <Star className="w-4 h-4" />
             Most Popular
           </div>
         </div>
@@ -178,7 +193,7 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
         <div className="space-y-3 mb-8 text-left">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center gap-3">
-              {Check ? <Check className="w-5 h-5 text-green-400 flex-shrink-0" /> : <span className="text-green-400 flex-shrink-0">✓</span>}
+              <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
               <span className="text-gray-300">{feature}</span>
             </div>
           ))}
@@ -205,7 +220,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white" style={{ margin: 0, padding: 0 }}>
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
@@ -214,11 +229,9 @@ export default function App() {
       <header className="relative z-50 border-b border-gray-800/50 backdrop-blur-xl">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex items-center justify-between h-20">
-            {/* Logo - Fixed Size */}
+            {/* Logo */}
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
+              <ShadowLogo />
               <span className="text-2xl font-bold">ShadowVPN</span>
             </div>
 
@@ -243,7 +256,7 @@ export default function App() {
               className="lg:hidden text-gray-300 hover:text-white p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <span className="text-2xl">✕</span> : <span className="text-2xl">☰</span>}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
 
@@ -286,10 +299,10 @@ export default function App() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
                 <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3">
                   Get ShadowVPN Free
-                  {ArrowRight ? <ArrowRight className="w-5 h-5" /> : <span>→</span>}
+                  <ArrowRight className="w-5 h-5" />
                 </button>
                 <button className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
-                  {PlayCircle ? <PlayCircle className="w-6 h-6" /> : <span>▶</span>}
+                  <PlayCircle className="w-6 h-6" />
                   <span className="font-medium">Watch Demo</span>
                 </button>
               </div>
@@ -297,15 +310,15 @@ export default function App() {
               {/* Trust Indicators */}
               <div className="flex flex-wrap justify-center items-center gap-12 text-gray-500">
                 <div className="flex items-center gap-3">
-                  {Shield ? <Shield className="w-5 h-5" /> : <span>🛡</span>}
+                  <Shield className="w-5 h-5" />
                   <span className="font-medium">Military-grade encryption</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  {Globe ? <Globe className="w-5 h-5" /> : <span>🌐</span>}
+                  <Globe className="w-5 h-5" />
                   <span className="font-medium">60+ countries</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  {Eye ? <Eye className="w-5 h-5" /> : <span>👁</span>}
+                  <Eye className="w-5 h-5" />
                   <span className="font-medium">Zero logs</span>
                 </div>
               </div>
@@ -442,9 +455,7 @@ export default function App() {
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs">S</span>
-                </div>
+                <ShadowLogo size="w-6 h-6" textSize="text-xs" />
                 <span className="text-xl font-bold">ShadowVPN</span>
               </div>
               <p className="text-gray-400 leading-relaxed">
@@ -485,9 +496,7 @@ export default function App() {
               &copy; 2025 ShadowVPN. All rights reserved.
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-bold text-xs">A</span>
-              </div>
+              <ALLLogo />
               <span className="text-cyan-400 font-semibold">Powered by ALL</span>
             </div>
           </div>
