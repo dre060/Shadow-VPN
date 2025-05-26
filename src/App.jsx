@@ -28,32 +28,23 @@ function ALLLogo({ size = "w-4 h-4" }) {
   );
 }
 
-function FeatureCard({ title, desc, icon: Icon }) {
-  return (
-    <div className="text-center p-6 lg:p-8">
-      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto shadow-lg">
-        <Icon className="w-8 h-8 text-white" />
-      </div>
-      <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
-      <p className="text-gray-400 leading-relaxed text-sm lg:text-base">{desc}</p>
-    </div>
-  );
-}
-
 function PricingCard({ plan, price, originalPrice, period, features, isPopular = false }) {
   return (
     <div className={`relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-500 ${isPopular ? 'ring-2 ring-blue-500 scale-105' : ''}`}>
       {isPopular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-            <Star className="w-4 h-4" /> Most Popular
+            <Star className="w-4 h-4" />
+            Most Popular
           </div>
         </div>
       )}
       <div className="text-center">
         <h3 className="text-2xl font-bold mb-4 text-white">{plan}</h3>
         <div className="mb-6">
-          {originalPrice && <div className="text-gray-400 line-through text-lg mb-2">${originalPrice}/{period}</div>}
+          {originalPrice && (
+            <div className="text-gray-400 line-through text-lg mb-2">${originalPrice}/{period}</div>
+          )}
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-4xl font-bold text-white">${price}</span>
             <span className="text-gray-400">/{period}</span>
@@ -67,7 +58,9 @@ function PricingCard({ plan, price, originalPrice, period, features, isPopular =
             </div>
           ))}
         </div>
-        <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${isPopular ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white' : 'bg-white text-gray-900 hover:bg-gray-100'}`}>
+        <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
+          isPopular ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl' : 'bg-white text-gray-900 hover:bg-gray-100'
+        }`}>
           Get Started
         </button>
       </div>
@@ -136,35 +129,61 @@ export default function App() {
         </div>
       </section>
 
-      <section id="features" className="py-24 bg-gray-900/20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Why choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ShadowVPN</span>?
-          </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12">
-            Experience the perfect balance of security, speed, and simplicity with our cutting-edge VPN technology.
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            <FeatureCard title="Unbreakable Security" desc="AES-256 military-grade encryption ensures your data stays protected from any threat." icon={Lock} />
-            <FeatureCard title="Lightning Speed" desc="Optimized servers deliver blazing-fast connections without compromising privacy." icon={Zap} />
-            <FeatureCard title="True Privacy" desc="No logs policy means we never track, store, or share your online activities." icon={Eye} />
+      <section id="pricing" className="relative z-10 py-32 bg-gray-900/20">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span></h2>
+            <p className="text-xl text-gray-400">All plans include our premium features with a 30-day money-back guarantee.</p>
           </div>
-        </div>
-      </section>
-
-      <section id="pricing" className="py-24">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-6">Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span></h2>
-          <p className="text-lg text-gray-400 mb-12">All plans include premium features and a 30-day money-back guarantee.</p>
           <div className="grid md:grid-cols-3 gap-8">
-            <PricingCard plan="1 Month" price="12.99" period="month" features={["Connect up to 6 devices", "60+ server locations", "24/7 support", "Kill switch", "No activity logs"]} />
-            <PricingCard plan="1 Year" price="4.99" originalPrice="12.99" period="month" features={["Connect up to 6 devices", "60+ server locations", "24/7 priority support", "Advanced kill switch", "No logs", "Threat protection"]} isPopular={true} />
-            <PricingCard plan="2 Years" price="3.99" originalPrice="12.99" period="month" features={["Connect up to 6 devices", "60+ server locations", "VIP support", "Advanced kill switch", "No logs", "Threat protection"]} />
+            <PricingCard
+              plan="1 Month"
+              price="12.99"
+              period="month"
+              features={[
+                "Connect up to 6 devices",
+                "60+ server locations",
+                "24/7 support",
+                "Kill switch",
+                "No activity logs"
+              ]}
+            />
+            <PricingCard
+              plan="1 Year"
+              price="4.99"
+              originalPrice="12.99"
+              period="month"
+              features={[
+                "Connect up to 6 devices",
+                "60+ server locations",
+                "24/7 priority support",
+                "Advanced kill switch",
+                "No activity logs",
+                "Threat protection",
+                "Save 62%"
+              ]}
+              isPopular
+            />
+            <PricingCard
+              plan="2 Years"
+              price="3.99"
+              originalPrice="12.99"
+              period="month"
+              features={[
+                "Connect up to 6 devices",
+                "60+ server locations",
+                "VIP support",
+                "Advanced kill switch",
+                "No activity logs",
+                "Threat protection",
+                "Save 69%"
+              ]}
+            />
           </div>
         </div>
       </section>
 
-      <footer className="py-12 border-t border-gray-800 bg-gray-950/60">
+      <footer className="relative z-10 py-12 border-t border-gray-800 bg-gray-950/60">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-3 text-gray-400 mb-4 md:mb-0">
             <ALLLogo size="w-6 h-6" />
