@@ -36,12 +36,12 @@ function FeatureCard({ title, desc, icon: Icon, delay = 0 }) {
   }, [delay]);
 
   return (
-    <div className={`text-center p-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto hover:scale-110 transition-transform duration-300 shadow-lg">
+    <div className={`text-center p-6 lg:p-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto hover:scale-110 transition-transform duration-300 shadow-lg hover:shadow-2xl">
         <Icon className="w-8 h-8 text-white" />
       </div>
       <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
-      <p className="text-gray-400 leading-relaxed">{desc}</p>
+      <p className="text-gray-400 leading-relaxed text-sm lg:text-base">{desc}</p>
     </div>
   );
 }
@@ -236,32 +236,42 @@ export default function App() {
       {/* Header */}
       <header className="relative z-50 w-full border-b border-gray-800/50 backdrop-blur-xl">
         <div className="w-full max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             {/* Logo */}
-            <div className="flex items-center space-x-3">
-              <ShadowLogo size="w-10 h-10" />
-              <span className="text-2xl font-bold">ShadowVPN</span>
+            <div className="flex items-center space-x-4">
+              <ShadowLogo size="w-12 h-12" />
+              <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-12">
-              <a href="#features" className="text-gray-300 hover:text-white transition-colors font-medium">Features</a>
-              <a href="#pricing" className="text-gray-300 hover:text-white transition-colors font-medium">Pricing</a>
-              <a href="#apps" className="text-gray-300 hover:text-white transition-colors font-medium">Apps</a>
-              <a href="#support" className="text-gray-300 hover:text-white transition-colors font-medium">Support</a>
-            </nav>
+            {/* Desktop Navigation - FIXED */}
+            <div className="hidden lg:flex items-center space-x-1">
+              <a href="#features" className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg">
+                Features
+              </a>
+              <a href="#pricing" className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg">
+                Pricing
+              </a>
+              <a href="#apps" className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg">
+                Apps
+              </a>
+              <a href="#support" className="text-gray-300 hover:text-white hover:bg-gray-800/30 transition-all duration-200 font-medium px-6 py-3 rounded-lg">
+                Support
+              </a>
+            </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <button className="text-gray-300 hover:text-white transition-colors font-medium">Sign In</button>
-              <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+            <div className="hidden lg:flex items-center space-x-6">
+              <button className="text-gray-300 hover:text-white transition-colors font-medium px-4 py-2">
+                Sign In
+              </button>
+              <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
                 Get ShadowVPN
               </button>
             </div>
 
             {/* Mobile menu button */}
             <button 
-              className="lg:hidden text-gray-300 hover:text-white p-2"
+              className="lg:hidden text-gray-300 hover:text-white p-3 hover:bg-gray-800/30 rounded-lg transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -270,15 +280,25 @@ export default function App() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="lg:hidden py-6 border-t border-gray-800">
-              <div className="space-y-4">
-                <a href="#features" className="block text-gray-300 hover:text-white transition-colors py-2">Features</a>
-                <a href="#pricing" className="block text-gray-300 hover:text-white transition-colors py-2">Pricing</a>
-                <a href="#apps" className="block text-gray-300 hover:text-white transition-colors py-2">Apps</a>
-                <a href="#support" className="block text-gray-300 hover:text-white transition-colors py-2">Support</a>
-                <div className="pt-4 space-y-3">
-                  <button className="block w-full text-left text-gray-300 hover:text-white py-2">Sign In</button>
-                  <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 py-3 rounded-xl font-semibold">
+            <div className="lg:hidden py-6 border-t border-gray-800 bg-gray-900/95 backdrop-blur-xl rounded-b-2xl">
+              <div className="space-y-2">
+                <a href="#features" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                  Features
+                </a>
+                <a href="#pricing" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                  Pricing
+                </a>
+                <a href="#apps" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                  Apps
+                </a>
+                <a href="#support" className="block text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors py-3 px-4 rounded-lg">
+                  Support
+                </a>
+                <div className="pt-4 space-y-3 border-t border-gray-800 mt-4">
+                  <button className="block w-full text-left text-gray-300 hover:text-white hover:bg-gray-800/50 py-3 px-4 rounded-lg transition-colors">
+                    Sign In
+                  </button>
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 py-3 px-4 rounded-xl font-semibold transition-all duration-300">
                     Get ShadowVPN
                   </button>
                 </div>
@@ -289,44 +309,44 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 w-full py-32">
+      <section className="relative z-10 w-full py-20 lg:py-28">
         <div className="w-full max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-5xl mx-auto">
+          <div className="text-center max-w-6xl mx-auto">
             <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-              <h1 className="text-6xl lg:text-7xl font-bold leading-tight mb-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] mb-8 tracking-tight">
                 Browse. Vanish.
                 <br />
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                   Repeat.
                 </span>
               </h1>
-              <p className="text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-400 mb-12 leading-relaxed max-w-4xl mx-auto px-4">
                 Military-grade privacy meets lightning-fast speed. Your digital freedom starts here.
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
-                <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3">
+                <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-10 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center gap-3 hover:scale-105">
                   Get ShadowVPN Free
                   <ArrowRight className="w-5 h-5" />
                 </button>
-                <button className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors">
+                <button className="flex items-center gap-3 text-gray-300 hover:text-white transition-colors px-8 py-4 rounded-xl border border-gray-600 hover:border-gray-400 hover:bg-gray-800/30">
                   <PlayCircle className="w-6 h-6" />
-                  <span className="font-medium">Watch Demo</span>
+                  <span className="font-medium text-lg">Watch Demo</span>
                 </button>
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center items-center gap-12 text-gray-500">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-5 h-5" />
+              <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16 text-gray-500 px-4">
+                <div className="flex items-center gap-3 bg-gray-900/30 px-4 py-3 rounded-full border border-gray-800">
+                  <Shield className="w-5 h-5 text-blue-400" />
                   <span className="font-medium">Military-grade encryption</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Globe className="w-5 h-5" />
+                <div className="flex items-center gap-3 bg-gray-900/30 px-4 py-3 rounded-full border border-gray-800">
+                  <Globe className="w-5 h-5 text-purple-400" />
                   <span className="font-medium">60+ countries</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Eye className="w-5 h-5" />
+                <div className="flex items-center gap-3 bg-gray-900/30 px-4 py-3 rounded-full border border-gray-800">
+                  <Eye className="w-5 h-5 text-green-400" />
                   <span className="font-medium">Zero logs</span>
                 </div>
               </div>
@@ -336,18 +356,18 @@ export default function App() {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="relative z-10 w-full py-32">
+      <section id="features" className="relative z-10 w-full py-24 lg:py-32">
         <div className="w-full max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
               Why choose <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">ShadowVPN</span>?
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Experience the perfect balance of security, speed, and simplicity with our cutting-edge VPN technology.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12 lg:gap-16 mb-20">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-24">
             <FeatureCard 
               title="Unbreakable Security" 
               desc="AES-256 military-grade encryption ensures your data stays protected from any threat, anywhere in the world."

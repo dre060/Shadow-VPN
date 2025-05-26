@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Base styles */
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +9,7 @@
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
@@ -17,10 +18,10 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  height: 100%;
   background: #000;
   color: #fff;
   overflow-x: hidden;
-  /* Remove flex and centering properties that conflict */
 }
 
 #root {
@@ -28,7 +29,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  /* Remove text-align and centering */
+  position: relative;
 }
 
 /* Custom animations */
@@ -57,4 +58,18 @@ body {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Remove any default styling that might interfere */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure proper text rendering */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(to right, #60a5fa, #a855f7);
 }
