@@ -28,48 +28,9 @@ function ALLLogo({ size = "w-4 h-4" }) {
   );
 }
 
-function PricingCard({ plan, price, originalPrice, period, features, isPopular = false }) {
-  return (
-    <div className={`relative bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-500 ${isPopular ? 'ring-2 ring-blue-500 scale-105' : ''}`}>
-      {isPopular && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2">
-            <Star className="w-4 h-4" />
-            Most Popular
-          </div>
-        </div>
-      )}
-      <div className="text-center">
-        <h3 className="text-2xl font-bold mb-4 text-white">{plan}</h3>
-        <div className="mb-6">
-          {originalPrice && (
-            <div className="text-gray-400 line-through text-lg mb-2">${originalPrice}/{period}</div>
-          )}
-          <div className="flex items-baseline justify-center gap-1">
-            <span className="text-4xl font-bold text-white">${price}</span>
-            <span className="text-gray-400">/{period}</span>
-          </div>
-        </div>
-        <div className="space-y-3 mb-8 text-left">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-center gap-3">
-              <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-              <span className="text-gray-300">{feature}</span>
-            </div>
-          ))}
-        </div>
-        <button className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
-          isPopular ? 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl' : 'bg-white text-gray-900 hover:bg-gray-100'
-        }`}>
-          Get Started
-        </button>
-      </div>
-    </div>
-  );
-}
-
 export default function App() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -77,30 +38,36 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full bg-black text-white overflow-x-hidden">
+      {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-purple-950/20"></div>
 
+      {/* Header */}
       <header className="relative z-50 w-full border-b border-gray-800/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <ShadowLogo size="w-10 h-10" />
             <span className="text-2xl font-bold tracking-tight">ShadowVPN</span>
           </div>
+
           <nav className="hidden lg:flex space-x-6">
             <a href="#features" className="text-gray-300 hover:text-white transition">Features</a>
             <a href="#pricing" className="text-gray-300 hover:text-white transition">Pricing</a>
             <a href="#support" className="text-gray-300 hover:text-white transition">Support</a>
           </nav>
+
           <div className="hidden lg:flex space-x-4">
             <button className="text-gray-300 hover:text-white transition">Sign In</button>
             <button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-4 py-2 rounded-lg text-white font-semibold shadow-md hover:shadow-xl transition">Get ShadowVPN</button>
           </div>
-          <button className="lg:hidden text-gray-300 hover:text-white">
-            <Menu className="w-6 h-6" />
+
+          <button className="lg:hidden text-gray-300 hover:text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </header>
 
+      {/* Hero Section */}
       <section className="relative z-10 py-24 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 ${isVisible ? 'animate-fade-in' : ''}`}>Browse. Vanish.<br /><span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Repeat.</span></h1>
@@ -115,6 +82,7 @@ export default function App() {
               <PlayCircle className="w-5 h-5" /> Watch Demo
             </button>
           </div>
+
           <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-blue-400" /> Military-grade encryption
@@ -129,60 +97,20 @@ export default function App() {
         </div>
       </section>
 
-      <section id="pricing" className="relative z-10 py-32 bg-gray-900/20">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span></h2>
-            <p className="text-xl text-gray-400">All plans include our premium features with a 30-day money-back guarantee.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <PricingCard
-              plan="1 Month"
-              price="12.99"
-              period="month"
-              features={[
-                "Connect up to 6 devices",
-                "60+ server locations",
-                "24/7 support",
-                "Kill switch",
-                "No activity logs"
-              ]}
-            />
-            <PricingCard
-              plan="1 Year"
-              price="4.99"
-              originalPrice="12.99"
-              period="month"
-              features={[
-                "Connect up to 6 devices",
-                "60+ server locations",
-                "24/7 priority support",
-                "Advanced kill switch",
-                "No activity logs",
-                "Threat protection",
-                "Save 62%"
-              ]}
-              isPopular
-            />
-            <PricingCard
-              plan="2 Years"
-              price="3.99"
-              originalPrice="12.99"
-              period="month"
-              features={[
-                "Connect up to 6 devices",
-                "60+ server locations",
-                "VIP support",
-                "Advanced kill switch",
-                "No activity logs",
-                "Threat protection",
-                "Save 69%"
-              ]}
-            />
+      <section id="pricing" className="relative z-10 py-24 lg:py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+              Choose your <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">plan</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              All plans include our premium features with a 30-day money-back guarantee.
+            </p>
           </div>
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="relative z-10 py-12 border-t border-gray-800 bg-gray-950/60">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-3 text-gray-400 mb-4 md:mb-0">
