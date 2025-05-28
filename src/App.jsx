@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Zap, Globe, Eye, Lock, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
 
-// Logo Components
+// Logo Components - Using the logo from public folder
 function ShadowVPNLogo({ className }) {
   return (
     <div className={`flex items-center ${className}`}>
       <div className="relative">
-        <Shield className="w-8 h-8 text-blue-500" fill="currentColor" />
-        <div className="absolute inset-0 w-8 h-8 bg-purple-500 opacity-50 blur-sm transform rotate-3"></div>
+        <img 
+          src="/logo.png" 
+          alt="ShadowVPN Logo" 
+          className="w-8 h-8"
+          onError={(e) => {
+            // Fallback to Lucide icon if image fails to load
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'block';
+          }}
+        />
+        <Shield className="w-8 h-8 text-blue-500 hidden" fill="currentColor" />
+        <div className="absolute inset-0 w-8 h-8 bg-purple-500 opacity-30 blur-sm transform rotate-3"></div>
       </div>
-      <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+      <span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
         ShadowVPN
       </span>
     </div>
@@ -111,18 +121,28 @@ export default function App() {
           <div className="flex items-center justify-between">
             <ShadowVPNLogo />
             
-            {/* Desktop Navigation - Using forced CSS classes */}
-            <nav className="navigation-fix hidden md:flex">
-              <a href="#features" className="nav-item">Features</a>
-              <a href="#pricing" className="nav-item">Pricing</a>
-              <a href="#apps" className="nav-item">Apps</a>
-              <a href="#support" className="nav-item">Support</a>
+            {/* Desktop Navigation - Properly spaced */}
+            <nav className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-white hover:text-blue-400 transition-colors font-medium">
+                Features
+              </a>
+              <a href="#pricing" className="text-white hover:text-blue-400 transition-colors font-medium">
+                Pricing
+              </a>
+              <a href="#apps" className="text-white hover:text-blue-400 transition-colors font-medium">
+                Apps
+              </a>
+              <a href="#support" className="text-white hover:text-blue-400 transition-colors font-medium">
+                Support
+              </a>
             </nav>
 
             {/* CTA Buttons */}
             <div className="hidden md:flex items-center space-x-4">
-              <button className="text-white hover:text-blue-400 transition-colors">Sign In</button>
-              <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors">
+              <button className="text-white hover:text-blue-400 transition-colors font-medium">
+                Sign In
+              </button>
+              <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-lg font-medium transition-colors">
                 Get ShadowVPN
               </button>
             </div>
@@ -140,13 +160,13 @@ export default function App() {
           {mobileMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-gray-800 pt-4">
               <nav className="flex flex-col space-y-4">
-                <a href="#features" className="text-white hover:text-blue-400">Features</a>
-                <a href="#pricing" className="text-white hover:text-blue-400">Pricing</a>
-                <a href="#apps" className="text-white hover:text-blue-400">Apps</a>
-                <a href="#support" className="text-white hover:text-blue-400">Support</a>
+                <a href="#features" className="text-white hover:text-blue-400 transition-colors">Features</a>
+                <a href="#pricing" className="text-white hover:text-blue-400 transition-colors">Pricing</a>
+                <a href="#apps" className="text-white hover:text-blue-400 transition-colors">Apps</a>
+                <a href="#support" className="text-white hover:text-blue-400 transition-colors">Support</a>
                 <div className="flex flex-col space-y-2 pt-4 border-t border-gray-800">
-                  <button className="text-left text-white hover:text-blue-400">Sign In</button>
-                  <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium text-left">
+                  <button className="text-left text-white hover:text-blue-400 transition-colors">Sign In</button>
+                  <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium text-left transition-colors">
                     Get ShadowVPN
                   </button>
                 </div>

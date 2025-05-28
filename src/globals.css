@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Complete CSS Reset */
 *, *::before, *::after {
@@ -22,22 +24,4 @@ body {
 
 #root {
   height: 100%;
-}
-
-/* Force navigation styles */
-.navigation-fix {
-  display: flex !important;
-  align-items: center !important;
-  gap: 2rem !important;
-}
-
-.nav-item {
-  color: #ffffff !important;
-  text-decoration: none !important;
-  font-weight: 500 !important;
-  transition: color 0.2s ease !important;
-}
-
-.nav-item:hover {
-  color: #3b82f6 !important;
 }
