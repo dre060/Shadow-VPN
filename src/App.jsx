@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Zap, Globe, Eye, Lock, Smartphone, Fingerprint, Cpu, Menu, X, ArrowRight, Star, Check, PlayCircle, ChevronDown, ChevronRight } from 'lucide-react';
 
-// Logo Components - Using the logo from public folder
-function ShadowVPNLogo({ className }) {
+// Logo Components - Using the actual logo from public folder
+function ShadowVPNLogo({ className, animated = false }) {
   return (
     <div className={`flex items-center ${className}`}>
       <div className="relative">
         <img 
           src="/logo.png" 
           alt="ShadowVPN Logo" 
-          className="w-8 h-8"
+          className={`w-8 h-8 object-contain ${animated ? 'animate-pulse' : ''}`}
           onError={(e) => {
             // Fallback to Lucide icon if image fails to load
             e.target.style.display = 'none';
@@ -17,12 +17,29 @@ function ShadowVPNLogo({ className }) {
           }}
         />
         <Shield className="w-8 h-8 text-blue-500 hidden" fill="currentColor" />
-        <div className="absolute inset-0 w-8 h-8 bg-purple-500 opacity-30 blur-sm transform rotate-3"></div>
+        {animated && (
+          <div className="absolute inset-0 w-8 h-8 bg-blue-500 opacity-20 blur-md animate-ping"></div>
+        )}
       </div>
       <span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
         ShadowVPN
       </span>
     </div>
+  );
+}
+
+// Vanishing Animation Component
+function VanishingLogo({ src, alt, className }) {
+  return (
+    <img 
+      src={src}
+      alt={alt}
+      className={`${className} animate-vanish logo-glow`}
+      onError={(e) => {
+        // Fallback for ALL coin logo
+        e.target.style.display = 'none';
+      }}
+    />
   );
 }
 
@@ -119,7 +136,7 @@ export default function App() {
       <header className="border-b border-gray-800 sticky top-0 bg-gray-900/95 backdrop-blur-sm z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <ShadowVPNLogo />
+            <ShadowVPNLogo animated={true} />
             
             {/* Desktop Navigation - Properly spaced */}
             <nav className="hidden md:flex items-center space-x-8">
@@ -390,9 +407,20 @@ export default function App() {
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Powered by{' '}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Blockchain
+              ALL Ecosystem
             </span>
           </h2>
+          <div className="flex items-center justify-center mb-8">
+            <VanishingLogo 
+              src="/all-coin.png"
+              alt="ALL Ecosystem Logo"
+              className="w-16 h-16 mr-4"
+            />
+            <div className="text-left">
+              <p className="text-2xl font-bold text-cyan-400">ALL Ecosystem</p>
+              <p className="text-gray-400">Decentralized Privacy Network</p>
+            </div>
+          </div>
           <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             ShadowVPN is integrating with the{' '}
             <span className="text-cyan-400 font-semibold">ALL Ecosystem</span>{' '}
