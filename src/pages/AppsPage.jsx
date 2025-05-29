@@ -1,5 +1,4 @@
-import React from 'react';
-import { Smartphone, Monitor, Router, Chrome, Download, Shield, Zap, Globe, Browser } from 'lucide-react';
+import React from 'react';import { Smartphone, Monitor, Router, Chrome, Download, Shield, Zap, Globe } from 'lucide-react';
 import Layout from '../components/Layout';
 
 export default function AppsPage() {
